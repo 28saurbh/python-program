@@ -1,11 +1,18 @@
-import pandas as pd
-from bs4 import BeautifulSoup
+# importing modules
 import requests
+from bs4 import BeautifulSoup
+import lxml
 
-page = requests.get('https://www.worldometers.info/coronavirus/country/india/')
-soup = BeautifulSoup(page.content, 'html.parser')
-main = soup.find_all(class_='col-md-8')
-number = [data.find(class_='maincounter-number').get_text() for data in main]
-print(number)
-name = 'Coronavirus Cases:'
+# URL for scrapping data
+url = 'https://www.worldometers.info/coronavirus/'
 
+# get URL html
+page = requests.get(url)
+soup = BeautifulSoup(page.text, 'lxml')
+
+# print(soup)
+# main = soup.find(class_='content-inner')
+# print(main.prettify())
+name = soup.find(id='maincounter-wrap')
+# case = name.find('h1')
+print(name.text)

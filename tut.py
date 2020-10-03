@@ -5,3 +5,7 @@ for item in list:
         print(item)
 
 
+import django
+print(django.get_version())
+
+
